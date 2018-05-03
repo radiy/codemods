@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`requireJsToCommonJs handles arrow function callback: input 1`] = `
+define(['jQuery', 'backbone', 'underscore'], ($, Backbone, _) => {
+  var CONSTANT = 'a'
+
+  function somefn() {}
+
+  return Backbone.View.extend({})
+})
+
+`;
+
+exports[`requireJsToCommonJs handles arrow function callback: output 1`] = `
+var $ = require('jQuery')
+var Backbone = require('backbone')
+var _ = require('underscore')
+var CONSTANT = 'a'
+
+function somefn() {}
+
+module.exports = Backbone.View.extend({})
+
+`;
+
+exports[`requireJsToCommonJs handles define with two arguments: input 1`] = `
+define(['jQuery', 'backbone', 'underscore'], function($, Backbone, _) {
+  var CONSTANT = 'a'
+
+  function somefn() {}
+
+  return Backbone.View.extend({})
+})
+
+`;
+
+exports[`requireJsToCommonJs handles define with two arguments: output 1`] = `
+var $ = require('jQuery')
+var Backbone = require('backbone')
+var _ = require('underscore')
+var CONSTANT = 'a'
+
+function somefn() {}
+
+module.exports = Backbone.View.extend({})
+
+`;
+
+exports[`requireJsToCommonJs ignores code without define(): input 1`] = `
+var a
+var b
+document.hasFocus()
+
+`;
+
+exports[`requireJsToCommonJs ignores code without define(): output 1`] = `
+var a
+var b
+document.hasFocus()
+
+`;
+
+exports[`requireJsToCommonJs ignores define with no arguments: input 1`] = `
+define()
+
+`;
+
+exports[`requireJsToCommonJs ignores define with no arguments: output 1`] = `
+define()
+
+`;
+
+exports[`requireJsToCommonJs ignores non-global define: input 1`] = `
+function something() {
+  return define({ a: 1 })
+}
+
+`;
+
+exports[`requireJsToCommonJs ignores non-global define: output 1`] = `
+function something() {
+  return define({ a: 1 })
+}
+
+`;
+
+exports[`requireJsToCommonJs replaces define with module.exports: input 1`] = `
+define(function(require) {
+  var a = require('a')
+  var b = require('b')
+
+  return b.doSomethingWith(a)
+})
+
+`;
+
+exports[`requireJsToCommonJs replaces define with module.exports: output 1`] = `
+var a = require('a')
+var b = require('b')
+
+module.exports = b.doSomethingWith(a)
+
+`;
+
+exports[`requireJsToCommonJs replaces object with module.exports: input 1`] = `
+define({
+  a: 1,
+  b: 2,
+  c: 3,
+})
+
+`;
+
+exports[`requireJsToCommonJs replaces object with module.exports: output 1`] = `
+module.exports = {
+  a: 1,
+  b: 2,
+  c: 3,
+}
+
+`;
