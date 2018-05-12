@@ -16,8 +16,8 @@ module.exports = function requireJsToCommonJs(file, api) {
     return j.callExpression(j.identifier('require'), [j.literal(value)])
   }
 
-  function exportizeFunctionBody(body) {
-    return (body || []).map(node => {
+  function exportizeFunctionBody(body = []) {
+    return body.map(node => {
       return node.type === 'ReturnStatement'
         ? toModuleExportsExpression(node.argument)
         : node
