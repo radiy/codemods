@@ -3,6 +3,7 @@
 > A collection of JavaScript codemod scripts for easier code migration
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Build Status](https://travis-ci.org/macklinu/codemods.svg?branch=master)](https://travis-ci.org/macklinu/codemods)
 
 ## Scripts
 
