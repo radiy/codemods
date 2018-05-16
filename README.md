@@ -28,9 +28,8 @@ npx jscodeshift <files-or-glob> -t https://raw.githubusercontent.com/macklinu/co
 Runs the [Jest](https://facebook.github.io/jest/) test suite. Tip: run
 `yarn test --watch` for interactive watch mode during development.
 
-### `yarn lint`
-
-Runs [ESLint](https://eslint.org/) on the source files.
+Jest also includes an [ESLint](https://eslint.org/) runner, so running
+`yarn test` will lint and test all source files.
 
 ## Contributing
 
