@@ -43,5 +43,12 @@ jscodeshiftTester({
       return Backbone.View.extend({})
     })
     `,
+    'handles require param in array of modules': `
+    define(['require', 'backbone', 'underscore'], function(require, Backbone, _) {
+      const someOtherModule = require('some/other/module')
+
+      return Backbone.View.extend(_.extend({}))
+    })
+    `,
   },
 })

@@ -67,12 +67,17 @@ module.exports = function requireJsToCommonJs(file, api) {
         const requireNames = first.elements.map(element => element.value)
         const variableNames = second.params.map(param => param.name)
 
-        const requireStatements = variableNames.map((name, i) => {
-          return commonJsRequire({
-            variableName: name,
-            modulePath: requireNames[i],
+        const requireStatements = variableNames
+          .map((name, i) => {
+            if (name === 'require') {
+              return
+            }
+            return commonJsRequire({
+              variableName: name,
+              modulePath: requireNames[i],
+            })
           })
-        })
+          .filter(Boolean)
 
         j(path).replaceWith(
           j.program([

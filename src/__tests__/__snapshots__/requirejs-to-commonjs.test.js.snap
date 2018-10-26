@@ -46,6 +46,24 @@ module.exports = Backbone.View.extend({})
 
 `;
 
+exports[`requireJsToCommonJs handles require param in array of modules: input 1`] = `
+define(['require', 'backbone', 'underscore'], function(require, Backbone, _) {
+  const someOtherModule = require('some/other/module')
+
+  return Backbone.View.extend(_.extend({}))
+})
+
+`;
+
+exports[`requireJsToCommonJs handles require param in array of modules: output 1`] = `
+var Backbone = require('backbone')
+var _ = require('underscore')
+const someOtherModule = require('some/other/module')
+
+module.exports = Backbone.View.extend(_.extend({}))
+
+`;
+
 exports[`requireJsToCommonJs ignores code without define(): input 1`] = `
 var a
 var b
