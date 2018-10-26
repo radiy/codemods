@@ -1,6 +1,4 @@
-'use strict'
-
-const prettier = require('prettier')
+import prettier from 'prettier'
 
 expect.addSnapshotSerializer({
   test: val => typeof val === 'string',
@@ -9,6 +7,7 @@ expect.addSnapshotSerializer({
 
 function format(code) {
   return prettier.format(code, {
+    parser: 'babylon',
     semi: false,
     singleQuote: true,
     trailingComma: 'es5',
@@ -39,7 +38,7 @@ function runTest({ module, name, input, options = {} }) {
   })
 }
 
-module.exports = function jscodeshiftTester({ module, tests = {} }) {
+export default function jscodeshiftTester({ module, tests = {} }) {
   describe(module.name, () => {
     Object.entries(tests).forEach(([name, input]) => {
       runTest({ module, name, input })

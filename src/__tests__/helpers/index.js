@@ -1,7 +1,1 @@
-'use strict'
-
-const jscodeshiftTester = require('./jscodeshiftTester')
-
-module.exports = {
-  jscodeshiftTester,
-}
+export { default as jscodeshiftTester } from './jscodeshiftTester'

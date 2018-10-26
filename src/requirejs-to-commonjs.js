@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = function requireJsToCommonJs(file, api) {
   const j = api.jscodeshift
 
