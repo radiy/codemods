@@ -1,8 +1,3 @@
-'use strict'
-
 module.exports = {
-  plugins: ['jest'],
-  env: {
-    'jest/globals': true,
-  },
+  extends: ['macklinu/jest'],
 }

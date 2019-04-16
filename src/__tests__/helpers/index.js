@@ -1,1 +1,3 @@
-export { default as jscodeshiftTester } from './jscodeshiftTester'
+const jscodeshiftTester = require('./jscodeshiftTester')
+
+module.exports = { jscodeshiftTester }

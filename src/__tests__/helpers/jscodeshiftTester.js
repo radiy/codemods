@@ -1,20 +1,19 @@
-import prettier from 'prettier'
+const prettier = require('prettier')
 
 expect.addSnapshotSerializer({
   test: val => typeof val === 'string',
   print: val => val,
 })
 
-function format(code) {
-  return prettier.format(code, {
-    parser: 'babylon',
+const format = code =>
+  prettier.format(code, {
+    parser: 'babel',
     semi: false,
     singleQuote: true,
     trailingComma: 'es5',
   })
-}
 
-function runTest({ module, name, input, options = {} }) {
+const runTest = ({ module, name, input, options = {} }) => {
   // Handle ES6 modules using default export for the transform
   const transform = module.default || module
 
@@ -38,10 +37,12 @@ function runTest({ module, name, input, options = {} }) {
   })
 }
 
-export default function jscodeshiftTester({ module, tests = {} }) {
+const jscodeshiftTester = ({ module, tests = {} }) => {
   describe(module.name, () => {
     Object.entries(tests).forEach(([name, input]) => {
       runTest({ module, name, input })
     })
   })
 }
+
+module.exports = jscodeshiftTester
