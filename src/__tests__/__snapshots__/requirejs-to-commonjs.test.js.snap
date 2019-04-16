@@ -138,6 +138,24 @@ module.exports = b.doSomethingWith(a)
 
 `;
 
+exports[`requireJsToCommonJs replaces function that returns object with module.exports: input 1`] = `
+define(() => ({
+  RESOLVED: 'RESOLVED',
+  IGNORED: 'IGNORED',
+  UNRESOLVED: 'UNRESOLVED',
+}))
+
+`;
+
+exports[`requireJsToCommonJs replaces function that returns object with module.exports: output 1`] = `
+module.exports = {
+  RESOLVED: 'RESOLVED',
+  IGNORED: 'IGNORED',
+  UNRESOLVED: 'UNRESOLVED',
+}
+
+`;
+
 exports[`requireJsToCommonJs replaces object with module.exports: input 1`] = `
 define({
   a: 1,

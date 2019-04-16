@@ -45,7 +45,13 @@ const requireJsToCommonJs = (file, { jscodeshift: j }) => {
       if (defineArguments.length === 1) {
         const arg = defineArguments[0]
         if (isFunctionExpression(arg)) {
-          j(path).replaceWith(j.program(exportizeFunctionBody(arg.body.body)))
+          if (arg.body.type === 'ObjectExpression') {
+            j(path).replaceWith(
+              j.program([toModuleExportsExpression(arg.body)])
+            )
+          } else {
+            j(path).replaceWith(j.program(exportizeFunctionBody(arg.body.body)))
+          }
         } else if (arg.type === 'ObjectExpression') {
           j(path).replaceWith(j.program([toModuleExportsExpression(arg)]))
         }

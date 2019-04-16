@@ -26,6 +26,13 @@ jscodeshiftTester({
       c: 3,
     })
     `,
+    'replaces function that returns object with module.exports': `
+    define(() => ({
+      RESOLVED: "RESOLVED",
+      IGNORED: "IGNORED",
+      UNRESOLVED: "UNRESOLVED"
+    }));
+    `,
     'ignores define with no arguments': `define()`,
     'ignores non-global define': `
     function something() {
