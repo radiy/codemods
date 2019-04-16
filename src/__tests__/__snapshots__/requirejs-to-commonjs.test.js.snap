@@ -102,6 +102,24 @@ function something() {
 
 `;
 
+exports[`requireJsToCommonJs replaces arrow-function define with module.exports: input 1`] = `
+define(require => {
+  var a = require('a')
+  var b = require('b')
+
+  return b.doSomethingWith(a)
+})
+
+`;
+
+exports[`requireJsToCommonJs replaces arrow-function define with module.exports: output 1`] = `
+var a = require('a')
+var b = require('b')
+
+module.exports = b.doSomethingWith(a)
+
+`;
+
 exports[`requireJsToCommonJs replaces define with module.exports: input 1`] = `
 define(function(require) {
   var a = require('a')

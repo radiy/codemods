@@ -9,7 +9,14 @@ jscodeshiftTester({
     define(function(require) {
       var a = require('a')
       var b = require('b')
-    
+
+      return b.doSomethingWith(a)
+    })`,
+    'replaces arrow-function define with module.exports': `
+    define(require => {
+      var a = require('a')
+      var b = require('b')
+
       return b.doSomethingWith(a)
     })`,
     'replaces object with module.exports': `
