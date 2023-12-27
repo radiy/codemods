@@ -9,7 +9,9 @@ const requireJsToCommonJs = (file, { jscodeshift: j }) => {
   }
 
   const requireStatement = value =>
-    j.callExpression(j.identifier('require'), [j.literal(value)])
+    {
+      return j.callExpression(j.identifier('require'), [j.literal(value)])
+    }
 
   const exportizeFunctionBody = (body = []) =>
     body.map(node => {
@@ -19,12 +21,14 @@ const requireJsToCommonJs = (file, { jscodeshift: j }) => {
     })
 
   const commonJsRequire = ({ variableName, modulePath }) =>
-    j.variableDeclaration('var', [
-      j.variableDeclarator(
-        j.identifier(variableName),
-        requireStatement(modulePath)
-      ),
-    ])
+    {
+      return j.variableDeclaration('const', [
+        j.variableDeclarator(
+          j.identifier(variableName),
+          requireStatement(modulePath)
+        ),
+      ])
+    }
 
   const isFunctionExpression = node =>
     node.type === 'FunctionExpression' ||
@@ -64,14 +68,21 @@ const requireJsToCommonJs = (file, { jscodeshift: j }) => {
         const requireNames = first.elements.map(element => element.value)
         const variableNames = second.params.map(param => param.name)
 
-        const requireStatements = variableNames
-          .map((name, i) => {
+        const requireStatements = requireNames
+          .map((require, i) => {
+            let name = variableNames[i]
             if (name === 'require') {
               return
             }
+            if (require == null) {
+              console.log("WARN! skip ", first.elements[i])
+              return;
+            }
+            if (name == null)
+              return j.expressionStatement(requireStatement(require))
             return commonJsRequire({
               variableName: name,
-              modulePath: requireNames[i],
+              modulePath: require,
             })
           })
           .filter(Boolean)
